@@ -11,10 +11,12 @@ if [ $# -eq 1 ]; then
         firstOne=true
         for file in flashcards/$title/*; do
             if $firstOne; then
-                mv $file "flashcards/$title/${title}Q.png"
+                #echo $file
+                mv "$file" "flashcards/$title/${title}Q.png"
                 firstOne=false
             else 
-                mv $file "flashcards/$title/${title}A.png"
+                #echo $file
+                mv "$file" "flashcards/$title/${title}A.png"
             fi
         done
 

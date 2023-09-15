@@ -13,7 +13,7 @@ def openThisScreenshot(file) :
 
 	image = cv2.imread(str(file))
 	image_width, image_height = image.shape[1], image.shape[0]
-	print(image_width, image_height)
+	#print(image_width, image_height)
 
 	# Calculate the position to center the image
 	x_pos = (screen_width - image_width) // 4
@@ -30,7 +30,7 @@ def openThisScreenshot(file) :
 	cv2.destroyAllWindows()
 	#print("test")
 
-for i in range(10):
+while True:
 	folder = random.choice(os.listdir(path))
 	print(str(folder))
 	specificFile = random.choice(os.listdir(path + "/" + folder))

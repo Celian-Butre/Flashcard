@@ -1,5 +1,7 @@
 #! /bin/bash
 
+mydir="flashcards/TD1"
+
 if [ $# -eq 1 ]; then
     if [ $1 = "png" ]; then
         echo -n "title : "
@@ -12,19 +14,18 @@ if [ $# -eq 1 ]; then
         for file in flashcards/$title/*; do
             if $firstOne; then
                 #echo $file
-                mv "$file" "flashcards/$title/${title}Q.png"
+                mv "$file" "${mydir}/$title/${title}Q.png"
                 firstOne=false
             else 
                 #echo $file
-                mv "$file" "flashcards/$title/${title}A.png"
+                mv "$file" "${mydir}/$title/${title}A.png"
             fi
         done
-
     elif [ $1 = "txt" ]; then
         echo -n "title : "
         read title
-        codium "flashcards/$title/${title}A.txt"
-        codium "flashcards/$title/${title}Q.txt"
+        codium "${mydir}/$title/${title}A.txt"
+        codium "${mydir}/$title/${title}Q.txt"
     else
         echo put txt or png as argument
         exit

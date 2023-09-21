@@ -1,4 +1,4 @@
-path = "flashcards"
+pathList = ["../NET3101/flashcardDir/TD1"]
 
 import os, random, time
 
@@ -9,6 +9,10 @@ import cv2
 
 ideal_width, ideal_height = 2000, 1400
 screen_width, screen_height = (2560, 1600)
+
+listofLists = [os.listdir(path) for path in pathList]
+weights = [len(lst) for lst in listofLists]
+
 def openThisScreenshot(file) :
 
 	image = cv2.imread(str(file))
@@ -30,7 +34,11 @@ def openThisScreenshot(file) :
 	cv2.destroyAllWindows()
 	#print("test")
 
-for i in range(10):
+
+
+while True:
+	index = random.choices(range(len(weights)), weights=weights)[0]
+	path = pathList[index]
 	folder = random.choice(os.listdir(path))
 	print(str(folder))
 	specificFile = random.choice(os.listdir(path + "/" + folder))
@@ -53,3 +61,4 @@ for i in range(10):
 		openThisScreenshot(str(path + "/" + folder + "/" + folder + "A.png"))
 	else:
 		pass
+	input()

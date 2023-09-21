@@ -1,13 +1,26 @@
 #! /bin/bash
 
-mydir="flashcards/TD1"
+mydir="../NET3101/flashcardDir/CM"
 
 if [ $# -eq 1 ]; then
     if [ $1 = "png" ]; then
         echo -n "title : "
         read title
         #ls -t1 /Pictures/ | tail -2 | xargs -I {} mv {} flashcards/$title/
-        ls | echo
+        mkdir "${mydir}/$title/"
+        ls -t1 ~/Pictures/ | head -2 | xargs -I {} mv ~/Pictures/{} "${mydir}/$title/"
+
+        firstOne=true
+        for file in $mydir/$title/*; do
+            if $firstOne; then
+                #echo $file
+                mv "$file" "${mydir}/$title/${title}Q.png"
+                firstOne=false
+            else 
+                #echo $file
+                mv "$file" "${mydir}/$title/${title}A.png"
+            fi
+        done
     elif [ $1 = "txt" ]; then
         echo -n "title : "
         read title

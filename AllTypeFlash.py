@@ -1,4 +1,4 @@
-path = "flashcards"
+path = ["../NET3101/flashcardDir/CM", "../NET3101/flashcardDir/TD1"]
 
 import os, random, time
 
@@ -31,25 +31,31 @@ def openThisScreenshot(file) :
 	#print("test")
 
 while True:
-	folder = random.choice(os.listdir(path))
+	weights = [len(os.listdir(lst)) for lst in path]
+
+	chosen_index = random.choices(range(len(path)), weights=weights)[0]
+
+	chosen_path = path[chosen_index]
+
+	folder = random.choice(os.listdir(chosen_path))
 	print(str(folder))
-	specificFile = random.choice(os.listdir(path + "/" + folder))
+	specificFile = random.choice(os.listdir(chosen_path + "/" + folder))
 	if specificFile.lower().endswith(".txt"):
-		with open(str(path + "/" + folder + "/" + folder + "Q.txt"), 'r', encoding='utf-8') as file:
+		with open(str(chosen_path + "/" + folder + "/" + folder + "Q.txt"), 'r', encoding='utf-8') as file:
 		# Read and print the entire file content
 			content = file.read()
 			print(content)
 			file.close()
 			print("\n")
 		input()
-		with open(str(path + "/" + folder + "/" + folder + "A.txt"), 'r', encoding='utf-8') as file:
+		with open(str(chosen_path + "/" + folder + "/" + folder + "A.txt"), 'r', encoding='utf-8') as file:
 		# Read and print the entire file content
 			content = file.read()
 			print(content)
 			file.close()
 		print("\n\n")
 	elif specificFile.lower().endswith(".png"):
-		openThisScreenshot(str(path + "/" + folder + "/" + folder + "Q.png"))
-		openThisScreenshot(str(path + "/" + folder + "/" + folder + "A.png"))
+		openThisScreenshot(str(chosen_path + "/" + folder + "/" + folder + "Q.png"))
+		openThisScreenshot(str(chosen_path + "/" + folder + "/" + folder + "A.png"))
 	else:
 		pass
